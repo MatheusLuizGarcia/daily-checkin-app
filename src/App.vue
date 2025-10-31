@@ -1,25 +1,33 @@
-<style scoped>
-</style>
-
 <template>
-  <div class="min-h-screen flex flex-col">
-    <header class="bg-blue-600 text-white p-4">
-      <nav class="flex justify-center gap-6">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/dashboard">Dashboard</RouterLink>
-        <RouterLink to="/info">Info</RouterLink>
-      </nav>
-    </header>
+  <div id="app">
+    <div class="main-content">
+      <router-view />
+    </div>
 
-    <main class="flex-1 p-6">
-      <RouterView />
-    </main>
+    <nav class="navbar">
+      <RouterLink to="/">
+        <HomeIcon :class="['size-6', isActive('/') ? 'text-blue-500' : 'text-red-500']" />
+        <span :class="isActive('/') ? 'text-blue-500' : 'text-red-500'">Home</span>
+      </RouterLink>
 
-    <footer class="bg-gray-100 text-center p-4 text-sm">
-      © {{ new Date().getFullYear() }} - Checkin App
-    </footer>
+      <RouterLink to="/dashboard">
+        <CalendarDaysIcon :class="['size-6', isActive('/dashboard') ? 'text-blue-500' : 'text-red-500']" />
+        <span :class="isActive('/dashboard') ? 'text-blue-500' : 'text-red-500'">Dashboard</span>
+      </RouterLink>
+
+      <RouterLink to="/info">
+        <InformationCircleIcon :class="['size-6', isActive('/') ? 'text-blue-500' : 'text-red-500']" />
+        <span :class="isActive('/') ? 'text-blue-500' : 'text-red-500'">Info</span>
+      </RouterLink>
+    </nav>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { HomeIcon, InformationCircleIcon, CalendarDaysIcon } from '@heroicons/vue/24/solid'
+
+const route = useRoute()
+function isActive(path: string) { return route.path === path }
+
 </script>

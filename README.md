@@ -20,6 +20,7 @@ Uma aplicação web desenvolvida em **Vue.js** para realizar **check-ins diário
 - [Vue Router](https://router.vuejs.org/) — Gerenciamento de rotas   
 - [Vite](https://vitejs.dev/) — Ferramenta de build e servidor de desenvolvimento  
 - [Tailwind CSS](https://tailwindcss.com/) — Estilização moderna e responsiva 
+- [Heroicons](https://heroicons.com/) — Ícones estilizados dos mesmos criadores do Tailwind CSS  
 - [SQLite 3](https://sqlite.org/) — Armazenamento de dados locais  
 
 ---
