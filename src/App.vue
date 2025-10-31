@@ -6,18 +6,18 @@
 
     <nav class="navbar">
       <RouterLink to="/">
-        <HomeIcon :class="['size-6', isActive('/') ? 'text-blue-500' : 'text-red-500']" />
-        <span :class="isActive('/') ? 'text-blue-500' : 'text-red-500'">Home</span>
+        <HomeIcon :class="['size-6', isActive('/') ? 'text-blue-500' : 'text-grey-500']" />
+        <span :class="isActive('/') ? 'text-blue-500' : 'text-grey-500'">Home</span>
       </RouterLink>
 
       <RouterLink to="/dashboard">
-        <CalendarDaysIcon :class="['size-6', isActive('/dashboard') ? 'text-blue-500' : 'text-red-500']" />
-        <span :class="isActive('/dashboard') ? 'text-blue-500' : 'text-red-500'">Dashboard</span>
+        <CalendarDaysIcon :class="['size-6', isActive('/dashboard') ? 'text-blue-500' : 'text-grey-500']" />
+        <span :class="isActive('/dashboard') ? 'text-blue-500' : 'text-grey-500'">Dashboard</span>
       </RouterLink>
 
       <RouterLink to="/info">
-        <InformationCircleIcon :class="['size-6', isActive('/') ? 'text-blue-500' : 'text-red-500']" />
-        <span :class="isActive('/') ? 'text-blue-500' : 'text-red-500'">Info</span>
+        <InformationCircleIcon :class="['size-6', isActive('/info') ? 'text-blue-500' : 'text-grey-500']" />
+        <span :class="isActive('/info') ? 'text-blue-500' : 'text-grey-500'">Info</span>
       </RouterLink>
     </nav>
   </div>
