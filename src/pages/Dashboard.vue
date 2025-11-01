@@ -15,10 +15,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { Checkin } from '../modules/models/Checkin'
+import CheckinService from '../modules/services/checkinService'
 import CalendarFixed from '../components/CalendarFixed.vue'
+import { ref, computed, onBeforeMount } from 'vue'
 
-const noCheckins :Boolean = false
-const dates = ref<string[]>(['2025-11-29','2025-11-28','2025-11-22'])
-console.log(dates.value)
+
+const checkins = ref<Checkin[]>([])
+const dates = ref<string[]>([])
+const noCheckins = computed(() => checkins.value.length === 0)
+
+
+onBeforeMount(async () => {
+  checkins.value = await CheckinService.getAllCheckins()
+  dates.value.push (... checkins.value.map((checkin : Checkin) => checkin.date))
+})
+
+
 </script>

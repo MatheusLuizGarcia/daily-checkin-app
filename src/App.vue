@@ -3,7 +3,6 @@
     <div class="main-content">
       <router-view />
     </div>
-
     <nav class="navbar">
       <RouterLink to="/">
         <i :class="['pi pi-home text-2xl', isActive('/') ? 'text-blue-500' : 'text-gray-500']"></i>

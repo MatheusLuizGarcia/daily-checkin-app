@@ -29,8 +29,10 @@
 import { computed } from 'vue'
 
 const props = defineProps<{
-  highlightDates?: string[]
+  highlightDates? : string[]
 }>()
+
+console.log(props.highlightDates)
 
 const now = new Date()
 const todayY = now.getFullYear()
@@ -87,7 +89,8 @@ const calendarCells = computed(() => {
 
 function cellClass(cell: any) {
   if (cell.type === 'blank') return 'bg-transparent'
-  if (cell.isToday) return 'bg-blue-600'
+  if (cell.isToday && cell.isHighlighted) return 'border border-blue-600 bg-yellow-400'
+  if (cell.isToday && !cell.isHighlighted) return 'border border-blue-600'
   if (cell.isHighlighted) return 'bg-yellow-400'
   return 'bg-transparent hover:bg-gray-100'
 }

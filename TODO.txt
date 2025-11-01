@@ -1,0 +1,12 @@
+# usar dexie pra criar banco de dados persistente local (escalavel pwa)
+
+# estrutura do checkin
+
+idCheckin
+date
+atividade_idAtividade
+
+# estrutura da atividade
+
+idActivity
+desc

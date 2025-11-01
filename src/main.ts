@@ -5,6 +5,7 @@ import App from './App.vue'
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config';
 
+
 createApp(App)
     .use(router)
     .use(PrimeVue)
