@@ -10,27 +10,15 @@
     <p class="text-lg text-gray-600 mb-6">
       Registre suas atividades e acompanhe seu progresso diário.
     </p>
+    
+    <li v-for="act in activities" :key="act.activity" class="flex justify-between items-center shadow-sm rounded-lg p-3 border m-3 border-gray-600 hover:shadow-md transition"
+    >
+      <Checkbox v-model="selectedActivities" :inputId="act.activity" name="atividade" :value="act.id" />
+      <label :for="act.activity">{{ act.activity }}</label>
+    </li>
     <button class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 mr-4 margin-bottom-6" @click="todayCheckin">
       Fazer Checkin
     </button>
-    <form class="inline-block" @submit.prevent="lateCheckin">
-      <input
-        type="date"
-        class="border border-gray-300 rounded-lg px-4 py-2 mr-2"
-        name="lateCheckinDate"
-        id="lateCheckinDate"
-        v-model="lateCheckinDate"
-      />
-      <button
-        type="submit"
-        class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
-      >
-        Fazer Checkin Tardio
-      </button>
-    </form>
-    <br />
-    <br />
-    <br />
     <RouterLink
       to="/dashboard"
       class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
@@ -41,22 +29,63 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import Checkbox from 'primevue/checkbox';
 import CheckinService from '../modules/services/checkinService';
-const streakDays = 1;
-const lateCheckinDate = ref('');
+import ActivityService from '../modules/services/activityService';
+import type { Checkin } from '../modules/models/Checkin';
+import type { Activity } from '../modules/models/Activity';
+
+const streakDays = ref(0);
+const activities = ref<Activity[]>([]);
+const selectedActivities = ref<number[]>([]);
+
+onBeforeMount(async () => {
+  const checkins = await CheckinService.getAllCheckins();
+  streakDays.value = calculateCurrentStreak(checkins);
+  await fetchActivities();
+});
+
+async function fetchActivities() {
+  activities.value = await ActivityService.getAllActivities();
+}
 
 function todayCheckin() {
-  CheckinService.addCheckin('Checkin diário');
+  CheckinService.addCheckin(1);
   alert('Checkin realizado com sucesso!');
 }
 
-function lateCheckin() {
-  console.log(lateCheckinDate.value);
-  
-  CheckinService.addLateCheckin(lateCheckinDate.value);
+function calculateCurrentStreak(checkins: Checkin[]) : number {
+  if (!checkins.length) return 0
 
+  const dates : any[] = checkins
+    .map(c => new Date(c.date))
+    .sort((a: any, b: any) => a - b)
 
-  alert('Checkin atrasado realizado com sucesso!');
+  const today: Date = new Date()
+  const todayString = today.toISOString().split('T')[0]
+  const hasTodayCheckin = dates.some(d => d.toISOString().split('T')[0] === todayString)
+
+  let streak = 0
+  let currentDate = new Date(today)
+
+  if (!hasTodayCheckin) return 0
+
+  while (true) {
+    const dateStr = currentDate.toISOString().split('T')[0]
+    const found = dates.some(d => d.toISOString().split('T')[0] === dateStr)
+
+    if (found) {
+      streak++
+      // volta um dia
+      currentDate.setDate(currentDate.getDate() - 1)
+    } else {
+      break
+    }
+  }
+
+  console.log('Streak calculado:', streak);
+  return streak
 }
+
 </script>

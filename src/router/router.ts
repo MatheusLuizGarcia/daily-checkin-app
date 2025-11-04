@@ -3,6 +3,7 @@ import Home from '../pages/Home.vue'
 import Dashboard from '../pages/Dashboard.vue'
 import Info from '../pages/Info.vue'
 import NotFound from '../pages/NotFound.vue'
+import Activities from '../pages/Activities.vue'
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/info',
     name: 'Info',
     component: Info
+  },
+  {
+    path: '/activities',
+    name: 'Activities',
+    component: Activities
   },
   { path: '/:pathMatch(.*)*',
     name: 'NotFound', 

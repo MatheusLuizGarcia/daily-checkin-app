@@ -1,5 +1,5 @@
 export interface Checkin {
   id?: number;
   date: string;
-  activity: string;
+  activity: number;
 }
