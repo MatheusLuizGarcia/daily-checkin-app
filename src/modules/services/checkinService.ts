@@ -19,10 +19,20 @@ export async function addLateCheckin(date : string, activityId: number) {
 export async function removeCheckin(id: number) {
   await db.checkins.delete(id);
 }
+export async function getCheckinsByDate(date: string): Promise<Checkin[]> {
+    return db.checkins.where('date').equals(date).toArray()
+}
+
+//NAO USAR EM CHAMADA DE TELAS
+export async function excludeAllCheckins() {
+  await db.checkins.clear();
+}
 
 export default {
   getAllCheckins,
   addCheckin,
   removeCheckin,
-  addLateCheckin
+  addLateCheckin,
+  getCheckinsByDate,
+  excludeAllCheckins
 };

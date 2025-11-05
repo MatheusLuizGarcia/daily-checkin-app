@@ -18,5 +18,4 @@ createApp(App)
             cssLayer: false
         }
     }
- })
-    .mount('#app')
+ }).mount('#app')

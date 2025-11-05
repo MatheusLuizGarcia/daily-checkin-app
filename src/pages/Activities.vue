@@ -103,13 +103,11 @@ async function fetchActivities() {
 
 async function addActivity() {
   ActivityService.addActivity(activity.value, description.value);
-  alert('atividade adicionada com sucesso!');
   await fetchActivities();
 }
 
 async function excludeActivity(id: number) {
   ActivityService.removeActivity(id);
-  alert('atividade excluída com sucesso!');
   await fetchActivities();
 }
 </script>

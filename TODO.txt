@@ -1,12 +1,3 @@
-# usar dexie pra criar banco de dados persistente local (escalavel pwa)
+# gerar calendario interativo (navegar entre os meses e atualizar os dias destacados conforme o highlitedDates)
 
-# estrutura do checkin
-
-idCheckin
-date
-atividade_idAtividade
-
-# estrutura da atividade
-
-idActivity
-desc
+#fazer top bar fixa em App.vue

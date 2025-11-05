@@ -3,7 +3,7 @@
     <div class="main-content">
       <router-view />
     </div>
-<nav class="navbar flex justify-center items-center text-center divide-x divide-gray-600 w-full">
+<nav class="navbar flex justify-center items-center text-center divide-x divide-gray-600 bg-gray-900 w-full">
   <RouterLink
     to="/"
     class="flex flex-col items-center justify-center w-1/3 py-2"
